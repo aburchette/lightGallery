@@ -1,4 +1,4 @@
-/*! lightgallery - v1.2.7 - 2015-11-26
+/*! lightgallery - v1.2.7 - 2015-12-10
 * http://sachinchoolur.github.io/lightGallery/
 * Copyright (c) 2015 Sachin N; Licensed Apache 2.0 */
 (function($, window, document, undefined) {
@@ -80,7 +80,7 @@
 
         // lightGallery settings
         this.s = $.extend({}, defaults, options);
-        
+
         // When using dynamic mode, ensure dynamicEl is an array
         if (this.s.dynamic && this.s.dynamicEl !== 'undefined' && this.s.dynamicEl.constructor === Array &&  !this.s.dynamicEl.length) {
           throw("When using dynamic mode, you must also define dynamicEl as an Array.");
@@ -403,6 +403,10 @@
             html = this.s.dynamicEl[index].html;
         } else {
             html = this.$items.eq(index).attr('data-html');
+        }
+
+        if (!src) {
+            return {};
         }
 
         if (!src && html) {
