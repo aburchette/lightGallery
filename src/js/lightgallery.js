@@ -149,7 +149,6 @@
             if (!$('body').hasClass('lg-on')) {
                 setTimeout(function() {
                     _this.build(_this.index);
-                    $('body').addClass('lg-on');
                 });
             }
         }
@@ -164,7 +163,6 @@
             if (!$('body').hasClass('lg-on')) {
                 setTimeout(function() {
                     _this.build(_this.index);
-                    $('body').addClass('lg-on');
                 });
             }
         } else {
@@ -187,7 +185,6 @@
                 // prevent accidental double execution
                 if (!$('body').hasClass('lg-on')) {
                     _this.build(_this.index);
-                    $('body').addClass('lg-on');
                 }
             });
         }
@@ -195,6 +192,13 @@
     };
 
     Plugin.prototype.build = function(index) {
+        // Override to allow better interaction with Slick slider
+        // When slick slide is moved the slide will not be built
+        // Only move when the slide is clicked
+        // using global for now
+        if(window.slickSlideMoved){
+            return false;
+        }
 
         var _this = this;
 
@@ -246,6 +250,7 @@
 
         });
 
+        $('body').addClass('lg-on');
     };
 
     Plugin.prototype.structure = function() {
